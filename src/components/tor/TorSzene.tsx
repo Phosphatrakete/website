@@ -184,15 +184,17 @@ export function TorSzene({ onGeoeffnet }: { onGeoeffnet: () => void }) {
   );
 }
 
-/** Steinpfeiler mit Deckplatte und Kugelaufsatz. */
+/** Steinpfeiler mit Deckplatte, Kugelaufsatz und Bodenschatten. */
 function TorPfeiler() {
   return (
     <svg
       viewBox="0 0 80 520"
-      className="h-[min(58vh,480px)] w-auto shrink-0 drop-shadow-sm"
+      className="h-[min(58vh,480px)] w-auto shrink-0 drop-shadow-sm overflow-visible"
       aria-hidden="true"
       focusable="false"
     >
+      {/* Bodenschatten – erdet den Pfeiler unabhängig vom Viewport */}
+      <ellipse cx="40" cy="518" rx="52" ry="7" fill="#171d24" opacity="0.14" />
       <circle cx="40" cy="26" r="16" fill="#d9cba9" />
       <rect x="6" y="42" width="68" height="14" rx="2" fill="#e2d6ba" />
       <rect x="12" y="56" width="56" height="440" fill="#e9dfc8" />
@@ -210,14 +212,17 @@ function TorPfeiler() {
  * Spiegelung, sodass die Zierhälften sich in der Mitte treffen.
  */
 function TorFluegel({ gespiegelt = false }: { gespiegelt?: boolean }) {
-  const staebe = [10, 50, 90, 130, 170, 210, 250, 290];
+  const staebe = [10, 50, 90, 130, 170, 210, 250];
   // Oberkante des Flügels steigt zur Mitte hin an (Bogen).
   const obenBei = (x: number) => 128 - (x / 300) * 54 - 8 * Math.sin((x / 300) * Math.PI);
 
   return (
     <svg
       viewBox="0 0 300 470"
-      className="h-auto w-full"
+      // overflow-visible: Die Schlagleiste ragt minimal über die
+      // Flügelkante hinaus, damit an der Naht der beiden Hälften keine
+      // Subpixel-Haarlinie aufblitzt.
+      className="h-auto w-full overflow-visible"
       aria-hidden="true"
       focusable="false"
       style={gespiegelt ? { transform: "scaleX(-1)" } : undefined}
@@ -236,9 +241,10 @@ function TorFluegel({ gespiegelt = false }: { gespiegelt?: boolean }) {
         />
       ))}
 
-      {/* Ober- und Untergurte */}
+      {/* Ober- und Untergurte – der Bogen beginnt am äußersten Stab,
+          ohne über den Rahmen hinauszuragen */}
       <path
-        d={`M6,${obenBei(6) + 22} Q150,${obenBei(150) + 6} 296,${obenBei(296) + 22}`}
+        d={`M10,${obenBei(10) + 22} Q150,${obenBei(150) + 6} 296,${obenBei(296) + 22}`}
         stroke="#28323e"
         strokeWidth="7"
         fill="none"
@@ -246,8 +252,11 @@ function TorFluegel({ gespiegelt = false }: { gespiegelt?: boolean }) {
       <path d="M4,346 H298" stroke="#28323e" strokeWidth="7" />
       <path d="M4,452 H298" stroke="#28323e" strokeWidth="8" />
 
-      {/* Schlagleiste (Mittelkante) */}
-      <path d="M295,66 V456" stroke="#1e2630" strokeWidth="10" />
+      {/* Schlagleiste (Mittelkante) – zugleich der letzte „Stab“ des
+          Flügels, mit eigener, etwas größerer Speerspitze; ragt minimal
+          über die Naht, damit keine Haarlinie aufblitzt */}
+      <path d="M296,74 V456" stroke="#1e2630" strokeWidth="12" />
+      <path d="M296,52 l7,15 -7,7 -7,-7 Z" fill="#c2a565" />
 
       {/* Volutenwerk im unteren Feld */}
       <g stroke="#364350" strokeWidth="4" fill="none">
@@ -268,11 +277,10 @@ function TorFluegel({ gespiegelt = false }: { gespiegelt?: boolean }) {
       <g stroke="#c2a565" fill="none">
         <path d="M295,214 a48,48 0 0 0 0,96" strokeWidth="4" />
         <path d="M295,232 a30,30 0 0 0 0,60" strokeWidth="3" />
-        <path d="M295,254 l-9,8 9,8 Z" fill="#c2a565" stroke="none" />
       </g>
 
-      {/* Torgriff */}
-      <circle cx="272" cy="300" r="8" fill="none" stroke="#c2a565" strokeWidth="3.5" />
+      {/* Torgriff – unterhalb der Rosette */}
+      <circle cx="270" cy="332" r="8" fill="none" stroke="#c2a565" strokeWidth="3.5" />
     </svg>
   );
 }

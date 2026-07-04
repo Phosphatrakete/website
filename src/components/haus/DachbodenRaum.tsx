@@ -39,16 +39,16 @@ export function DachbodenRaum() {
       />
       <path d="M858,398 q10,6 20,0" stroke="#d9cba9" strokeWidth="1.5" fill="none" />
 
-      {/* Leiter */}
+      {/* Leiter – lehnt an der Deckenkante der Dachöffnung */}
       <g stroke="#9c7a55" strokeWidth="4.5" strokeLinecap="round">
-        <path d="M940,428 L968,326" />
-        <path d="M962,428 L990,326" />
+        <path d="M940,428 L972,316" />
+        <path d="M962,428 L994,316" />
       </g>
       <g stroke="#9c7a55" strokeWidth="3.5" strokeLinecap="round">
-        <path d="M947,408 l22,0" />
-        <path d="M953,386 l22,0" />
-        <path d="M959,364 l22,0" />
-        <path d="M965,342 l22,0" />
+        <path d="M946,408 l22,0" />
+        <path d="M953,384 l22,0" />
+        <path d="M959,360 l22,0" />
+        <path d="M966,336 l22,0" />
       </g>
 
       {/* Farbeimer und Pinsel – die Renovierung läuft */}
@@ -56,7 +56,8 @@ export function DachbodenRaum() {
         <path d="M806,410 h20 l-2,18 h-16 Z" fill="#5c7085" />
         <path d="M806,410 a10,4 0 0 1 20,0" fill="#7d8fa3" />
         <path d="M810,406 q6,-10 14,-4" stroke="#c9b98f" strokeWidth="2" fill="none" />
-        <rect x="1000" y="388" width="6" height="40" rx="2" fill="#d9cba9" transform="rotate(18 1003 408)" />
+        {/* Latte lehnt an der rechten Dachschräge */}
+        <rect x="1004" y="376" width="6" height="52" rx="2" fill="#d9cba9" transform="rotate(22 1007 402)" />
       </g>
     </g>
   );

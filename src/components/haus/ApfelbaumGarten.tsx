@@ -10,7 +10,7 @@ const APFEL_POSITIONEN: ReadonlyArray<readonly [number, number]> = [
   [412, 556],
   [452, 468],
   [390, 412],
-  [322, 545],
+  [338, 530],
   [442, 532],
   [286, 518],
   [362, 458],
@@ -55,10 +55,17 @@ export function ApfelbaumGarten() {
       <circle cx="298" cy="860" r="6" fill="#a85b4b" />
       <circle cx="478" cy="856" r="5.5" fill="#a85b4b" opacity="0.9" />
 
-      {/* Schaukel am linken Ast */}
+      {/* Schaukel – hängt an einem sichtbaren Aststück in der Krone */}
       <g>
-        <path d="M290,556 V640 M318,552 V640" stroke="#9c7a55" strokeWidth="2.5" />
-        <rect x="282" y="640" width="44" height="6" rx="2" fill="#7a5c42" />
+        <path
+          d="M276,562 Q304,550 332,558"
+          stroke="#5f4732"
+          strokeWidth="7"
+          strokeLinecap="round"
+          fill="none"
+        />
+        <path d="M290,558 V756 M318,556 V756" stroke="#9c7a55" strokeWidth="2.5" />
+        <rect x="282" y="756" width="44" height="6" rx="2" fill="#7a5c42" />
       </g>
 
       {/* Dezentes Schloss-Symbol am Stamm */}

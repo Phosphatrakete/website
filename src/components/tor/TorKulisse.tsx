@@ -92,20 +92,24 @@ export function TorKulisse({ p }: { p: string }) {
           <ellipse cx="790" cy="640" rx="4" ry="1.8" />
         </g>
 
-        {/* Baumallee – je näher, desto größer */}
+        {/* Baumallee – je näher, desto größer; alle Bäume stehen HINTER
+            der Torebene (Torsockel liegt bei etwa y=800) */}
         <AlleeBaum x={758} y={556} groesse={0.32} hell />
         <AlleeBaum x={842} y={556} groesse={0.32} hell />
         <AlleeBaum x={732} y={584} groesse={0.45} hell />
         <AlleeBaum x={868} y={584} groesse={0.45} hell />
         <AlleeBaum x={694} y={632} groesse={0.62} />
         <AlleeBaum x={906} y={632} groesse={0.62} />
-        <AlleeBaum x={636} y={716} groesse={0.85} />
-        <AlleeBaum x={964} y={716} groesse={0.85} />
-        <AlleeBaum x={548} y={852} groesse={1.2} />
-        <AlleeBaum x={1052} y={852} groesse={1.2} />
+        <AlleeBaum x={636} y={700} groesse={0.82} />
+        <AlleeBaum x={964} y={700} groesse={0.82} />
+        <AlleeBaum x={556} y={786} groesse={1.05} />
+        <AlleeBaum x={1044} y={786} groesse={1.05} />
 
         {/* Dunstschleier über der Ferne */}
         <rect x="430" y="420" width="740" height="240" fill={`url(#${p}-dunst)`} />
+
+        {/* Schattenband am Boden der Toröffnung – erdet Tor und Pfeiler */}
+        <ellipse cx="800" cy="806" rx="330" ry="10" fill="#171d24" opacity="0.1" />
       </g>
 
       {/* Hecken links und rechts – enden an den Torpfeilern */}
@@ -137,7 +141,8 @@ function FernesHaus() {
       {/* Mansarddach */}
       <path d="M718,446 L744,408 L856,408 L882,446 Z" fill="#47586a" />
       <path d="M744,408 L762,394 L838,394 L856,408 Z" fill="#5c7085" />
-      <rect x="828" y="376" width="12" height="24" fill="#a8695a" />
+      {/* Kamin bewusst entsättigt, damit er in der Tiefenunschärfe bleibt */}
+      <rect x="828" y="376" width="12" height="24" fill="#a88b80" opacity="0.85" />
       {/* Fenster als warme Lichter */}
       <g fill="#e8d9b4">
         <rect x="742" y="460" width="14" height="24" rx="1.5" />
@@ -147,9 +152,7 @@ function FernesHaus() {
       </g>
       {/* Tür */}
       <rect x="793" y="478" width="16" height="44" rx="2" fill="#4a3726" />
-      {/* Garage und Baum als Andeutung */}
-      <rect x="874" y="482" width="52" height="40" fill="#e9dfc8" />
-      <path d="M872,482 L930,478 L930,488 L872,492 Z" fill="#47586a" />
+      {/* Hausbaum als Andeutung */}
       <circle cx="682" cy="470" r="34" fill="#64784f" />
       <rect x="678" y="490" width="8" height="32" fill="#5f4732" />
     </g>
@@ -204,35 +207,45 @@ function AlleeBaum({
   );
 }
 
-/** Hohe Formschnitt-Hecke, endet mit gerundeter Kante am Torpfeiler. */
+/**
+ * Hohe Formschnitt-Hecke. Sie endet in einem eigenen Steinpfeiler –
+ * so hat die Heckenlinie unabhängig vom (responsiv positionierten)
+ * HTML-Tor immer einen sauberen Abschluss.
+ */
 function Hecke({ seite }: { seite: "links" | "rechts" }) {
-  // Die Hecke reicht vom Bildrand bis kurz vor die Torpfeiler.
   const spiegel = seite === "rechts" ? "translate(1600 0) scale(-1 1)" : undefined;
   return (
     <g transform={spiegel}>
-      <path
-        d="M-20,470 H492 Q516,470 516,494 V786 Q516,810 492,810 H-20 Z"
-        fill="#4c5d3c"
-      />
+      <rect x="-20" y="470" width="500" height="340" fill="#4c5d3c" />
       {/* Lichtkante oben */}
-      <path d="M-20,470 H492 Q510,470 514,486 L514,496 Q510,482 492,482 H-20 Z" fill="#8ca07a" opacity="0.8" />
+      <rect x="-20" y="470" width="500" height="12" fill="#8ca07a" opacity="0.8" />
       {/* Formschnitt-Absätze */}
-      <rect x="-20" y="574" width="524" height="10" fill="#3b4a2f" opacity="0.5" />
-      <rect x="-20" y="682" width="524" height="10" fill="#3b4a2f" opacity="0.5" />
-      {/* Schattige Endkante zum Tor hin */}
-      <path d="M496,482 Q514,486 514,506 V774 Q514,798 490,800 Q506,788 506,764 V520 Q506,494 496,482 Z" fill="#3b4a2f" opacity="0.6" />
+      <rect x="-20" y="574" width="500" height="10" fill="#3b4a2f" opacity="0.5" />
+      <rect x="-20" y="682" width="500" height="10" fill="#3b4a2f" opacity="0.5" />
       {/* Blattstruktur */}
       <g fill="#64784f" opacity="0.5">
         <ellipse cx="120" cy="524" rx="26" ry="12" />
         <ellipse cx="330" cy="610" rx="30" ry="13" />
-        <ellipse cx="450" cy="536" rx="24" ry="11" />
+        <ellipse cx="440" cy="536" rx="24" ry="11" />
         <ellipse cx="200" cy="726" rx="30" ry="12" />
-        <ellipse cx="420" cy="742" rx="26" ry="11" />
+        <ellipse cx="410" cy="742" rx="26" ry="11" />
       </g>
       <g fill="#3b4a2f" opacity="0.4">
         <ellipse cx="240" cy="562" rx="24" ry="10" />
         <ellipse cx="90" cy="660" rx="28" ry="11" />
         <ellipse cx="380" cy="676" rx="24" ry="10" />
+      </g>
+      {/* Steinpfeiler als Heckenabschluss */}
+      <g>
+        <rect x="472" y="452" width="46" height="358" fill="#e9dfc8" />
+        <rect x="466" y="440" width="58" height="14" rx="2" fill="#e2d6ba" />
+        <circle cx="495" cy="428" r="13" fill="#d9cba9" />
+        <g stroke="#d9cba9" strokeWidth="2">
+          <path d="M472,520 h46 M472,590 h46 M472,660 h46 M472,730 h46" />
+          <path d="M495,454 v66 M483,520 v70 M507,590 v70 M483,660 v70 M495,730 v80" opacity="0.6" />
+        </g>
+        {/* Schattenseite zum Tor hin */}
+        <rect x="510" y="452" width="8" height="358" fill="#c9b98f" opacity="0.5" />
       </g>
     </g>
   );

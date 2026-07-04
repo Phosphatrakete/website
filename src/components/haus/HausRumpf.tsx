@@ -34,14 +34,6 @@ export function HausRumpf() {
       <rect x="608" y="420" width="524" height="12" fill="#e9dfc8" />
       <rect x="608" y="430" width="524" height="3" fill="#c9b98f" opacity="0.6" />
 
-      {/* Kamin */}
-      <g>
-        <rect x="1008" y="196" width="42" height="76" fill="#a8695a" />
-        <rect x="1008" y="196" width="42" height="76" fill="none" stroke="#8f574a" strokeWidth="1.5" opacity="0.5" />
-        <path d="M1008,214 h42 M1008,232 h42 M1008,250 h42" stroke="#8f574a" strokeWidth="1.5" opacity="0.35" />
-        <rect x="1000" y="186" width="58" height="12" rx="2" fill="#394857" />
-      </g>
-
       {/* Mansarddach – seitliche Flächen + oberes Band, Mitte offen */}
       <path d="M596,430 L668,302 L740,312 L700,430 Z" fill="#47586a" />
       <path d="M1144,430 L1072,302 L1000,312 L1040,430 Z" fill="#47586a" />
@@ -49,10 +41,18 @@ export function HausRumpf() {
       {/* Dachnähte */}
       <path d="M632,366 L666,372" stroke="#394857" strokeWidth="2" opacity="0.35" />
       <path d="M1108,366 L1074,372" stroke="#394857" strokeWidth="2" opacity="0.35" />
-      {/* First mit Messingzier */}
-      <path d="M744,256 H996" stroke="#c2a565" strokeWidth="3" strokeLinecap="round" />
+      {/* First mit Messingzier – endet mit Kugel vor dem Kamin */}
+      <path d="M744,256 H932" stroke="#c2a565" strokeWidth="3" strokeLinecap="round" />
       <circle cx="744" cy="256" r="5" fill="#c2a565" />
-      <circle cx="996" cy="256" r="5" fill="#c2a565" />
+      <circle cx="932" cy="256" r="5" fill="#c2a565" />
+
+      {/* Kamin – steht auf dem flachen Firstband, vor der Firstzier */}
+      <g>
+        <rect x="948" y="196" width="42" height="76" fill="#a8695a" />
+        <rect x="948" y="196" width="42" height="76" fill="none" stroke="#8f574a" strokeWidth="1.5" opacity="0.5" />
+        <path d="M948,214 h42 M948,232 h42 M948,250 h42" stroke="#8f574a" strokeWidth="1.5" opacity="0.35" />
+        <rect x="940" y="186" width="58" height="12" rx="2" fill="#394857" />
+      </g>
 
       {/* Schnittkanten der Dachöffnung */}
       <g stroke={SCHNITTLINIE} strokeWidth="3" fill="none">
@@ -66,8 +66,8 @@ export function HausRumpf() {
       <rect x="614" y="606" width="512" height="16" fill={SCHNITTKANTE} />
       <rect x="614" y="606" width="512" height="16" fill="none" stroke={SCHNITTLINIE} strokeWidth="1.5" />
 
-      {/* Dachbodendecke (Boden des Dachbodens) */}
-      <rect x="688" y="424" width="364" height="10" fill={SCHNITTKANTE} />
+      {/* Dachbodendecke (Boden des Dachbodens) – bündig mit der Öffnung */}
+      <rect x="702" y="424" width="336" height="10" fill={SCHNITTKANTE} />
 
       {/* Aufgeschnittene Außenwände des Erdgeschosses */}
       <rect x="620" y="620" width="18" height="230" fill={SCHNITTKANTE} />
@@ -113,13 +113,14 @@ function Sprossenfenster({ mitteX }: { mitteX: number }) {
         <path d={`M${x + 5},547 H${x + 59}`} />
       </g>
 
-      {/* Schmiedeeisernes Balkongitter */}
+      {/* Schmiedeeisernes Balkongitter – endet über der Geschossdecke,
+          damit die Untergurt-Stange sichtbar bleibt */}
       <g stroke="#28323e" strokeWidth="2.5" fill="none">
-        <path d={`M${x - 4},594 H${x + 68}`} strokeWidth="3.5" />
+        <path d={`M${x - 4},592 H${x + 68}`} strokeWidth="3.5" />
         {[6, 18, 30, 42, 54].map((abstand) => (
-          <path key={abstand} d={`M${x + abstand},594 V608`} />
+          <path key={abstand} d={`M${x + abstand},592 V603`} />
         ))}
-        <path d={`M${x - 4},608 H${x + 68}`} />
+        <path d={`M${x - 4},603 H${x + 68}`} />
       </g>
     </g>
   );

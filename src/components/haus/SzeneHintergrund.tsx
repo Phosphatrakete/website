@@ -37,9 +37,9 @@ export function SzeneHintergrund({ p }: { p: string }) {
       <ellipse cx="380" cy="990" rx="520" ry="90" fill="#82966f" opacity="0.6" />
       <ellipse cx="1300" cy="1010" rx="560" ry="100" fill="#82966f" opacity="0.5" />
 
-      {/* Kiesweg zum Haus */}
+      {/* Kiesweg zum Haus – schließt an der Hauskante an */}
       <path
-        d="M720,1000 Q790,915 828,856 L900,856 Q872,918 930,1000 Z"
+        d="M720,1000 Q790,915 828,851 L900,851 Q872,918 930,1000 Z"
         fill="#e7ddc4"
         opacity="0.95"
       />
@@ -56,19 +56,12 @@ export function SzeneHintergrund({ p }: { p: string }) {
         <rect x="60" y="792" width="110" height="40" rx="20" opacity="0.85" />
       </g>
 
-      {/* Büsche und Lavendel am Haus */}
+      {/* Büsche am Haus und rechts der Garage */}
       <g>
         <circle cx="598" cy="838" r="22" fill="#64784f" />
         <circle cx="575" cy="846" r="16" fill="#4c5d3c" />
-        <circle cx="1128" cy="842" r="18" fill="#64784f" />
-        <g stroke="#64784f" strokeWidth="2" opacity="0.9">
-          <path d="M960,852 l4,-26 M968,852 l0,-30 M976,852 l-4,-26" fill="none" />
-        </g>
-        <g fill="#9797b8">
-          <ellipse cx="964" cy="822" rx="3.4" ry="8" />
-          <ellipse cx="968" cy="818" rx="3.4" ry="9" />
-          <ellipse cx="972" cy="822" rx="3.4" ry="8" />
-        </g>
+        <circle cx="1438" cy="842" r="18" fill="#64784f" />
+        <circle cx="1462" cy="848" r="13" fill="#4c5d3c" />
       </g>
     </g>
   );

@@ -44,19 +44,27 @@ export function GarageFluegel({ p }: { p: string }) {
         <rect x="1362" y="712" width="11" height="14" rx="1.5" fill="#5c7085" />
       </g>
 
-      {/* Klassiker unter der Staubplane (hinten) */}
+      {/* Klassiker unter der Staubplane (hinten) – die Plane zeichnet
+          Motorhaube, Kabine und Radläufe nach; die Räder stehen sichtbar
+          auf dem Garagenboden */}
       <g>
+        <g>
+          <circle cx="1168" cy="834" r="12" fill="#171d24" />
+          <circle cx="1168" cy="834" r="4" fill="#9aa1a6" opacity="0.6" />
+          <circle cx="1280" cy="834" r="12" fill="#171d24" />
+          <circle cx="1280" cy="834" r="4" fill="#9aa1a6" opacity="0.6" />
+        </g>
         <path
-          d="M1136,830 C1136,798 1150,780 1168,774 C1178,756 1206,750 1228,754 C1252,742 1284,748 1296,764 C1312,772 1320,790 1320,806 L1320,830 Z"
+          d="M1134,842 L1134,826 C1134,810 1142,800 1154,796 C1160,794 1164,790 1168,784 C1174,774 1188,766 1204,764 C1226,762 1248,764 1258,772 C1266,778 1276,782 1286,786 C1300,792 1310,804 1312,818 L1314,842 L1300,842 C1298,830 1290,822 1280,822 C1270,822 1262,830 1260,842 L1188,842 C1186,830 1178,822 1168,822 C1158,822 1150,830 1148,842 Z"
           fill="#e9dfc8"
-          opacity="0.4"
+          opacity="0.45"
         />
         <path
-          d="M1160,796 q14,8 30,2 M1240,784 q16,6 30,-2"
+          d="M1204,766 C1208,788 1208,816 1204,838 M1160,798 q12,8 26,4 M1240,800 q14,6 28,0"
           stroke="#f3ecdc"
           strokeWidth="1.6"
           fill="none"
-          opacity="0.4"
+          opacity="0.45"
         />
       </g>
 
@@ -71,7 +79,7 @@ export function GarageFluegel({ p }: { p: string }) {
           fill="#7d8fa3"
           opacity="0.75"
         />
-        <path d="M1180,822 H1366" stroke="#c2a565" strokeWidth="2" opacity="0.8" />
+        <path d="M1188,816 H1360" stroke="#c2a565" strokeWidth="2" opacity="0.8" />
         <circle cx="1222" cy="836" r="15" fill="#171d24" />
         <circle cx="1222" cy="836" r="5.5" fill="#9aa1a6" />
         <circle cx="1330" cy="836" r="15" fill="#171d24" />
