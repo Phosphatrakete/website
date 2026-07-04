@@ -66,7 +66,7 @@ export function TorSzene({ onGeoeffnet }: { onGeoeffnet: () => void }) {
       <button
         type="button"
         onClick={() => onGeoeffnet()}
-        className="absolute top-4 right-4 z-20 rounded-full border border-creme-300/60 bg-creme-50/70 px-4 py-1.5 text-xs text-tinte-700 shadow-karte backdrop-blur-sm transition-colors hover:bg-creme-100 hover:text-tinte-900"
+        className="absolute top-16 right-4 z-20 rounded-full border border-creme-300/60 bg-creme-50/70 px-4 py-1.5 text-xs text-tinte-700 shadow-karte backdrop-blur-sm transition-colors hover:bg-creme-100 hover:text-tinte-900"
       >
         Überspringen
       </button>

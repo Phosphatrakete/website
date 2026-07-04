@@ -29,6 +29,10 @@ export function Eingang() {
     } catch {
       // ohne localStorage zeigen wir das Tor bei jedem Besuch
     }
+    // Bewusst erst nach der Hydration: localStorage ist serverseitig nicht
+    // verfügbar, und ein Lesen im useState-Initializer ergäbe einen
+    // Hydration-Mismatch. Der Effekt läuft genau einmal.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setAnsicht(bereitsGeoeffnet || reduzierteBewegung ? "haus" : "tor");
   }, [ansicht, reduzierteBewegung]);
 
