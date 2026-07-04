@@ -1,26 +1,144 @@
 @import "tailwindcss";
 
+/*
+ * Design-Tokens der Familien-Website.
+ *
+ * Feste, warme Lichtstimmung – kein Dark Mode in V1.
+ * Palette: warmes Creme als Grundton, tiefes Anthrazit/Schieferblau für
+ * Kontraste, gedämpftes Messing als Akzent, gedecktes Grün für den Garten.
+ */
+@theme {
+  /* Grundton: warmes Creme / Off-White */
+  --color-creme-50: #fdfbf5;
+  --color-creme-100: #faf6ec;
+  --color-creme-200: #f3ecdc;
+  --color-creme-300: #e9dfc8;
+  --color-creme-400: #d9cba9;
+
+  /* Kontrast: tiefes Anthrazit mit Schieferblau-Einschlag */
+  --color-tinte-950: #171d24;
+  --color-tinte-900: #1e2630;
+  --color-tinte-800: #28323e;
+  --color-tinte-700: #364350;
+  --color-tinte-600: #475767;
+  --color-tinte-500: #5d7082;
+
+  /* Schieferblau (Dach, kühle Flächen) */
+  --color-schiefer-400: #7d8fa3;
+  --color-schiefer-500: #5c7085;
+  --color-schiefer-600: #47586a;
+  --color-schiefer-700: #394857;
+
+  /* Akzent: gedämpftes Gold / Messing */
+  --color-messing-200: #e8d9b4;
+  --color-messing-300: #d6bf8d;
+  --color-messing-400: #c2a565;
+  --color-messing-500: #a98a4e;
+  --color-messing-600: #8a6f3c;
+  --color-messing-700: #6d572f;
+
+  /* Gedecktes Grün für den Garten */
+  --color-garten-200: #cdd8bd;
+  --color-garten-300: #a9ba97;
+  --color-garten-400: #8ca07a;
+  --color-garten-500: #64784f;
+  --color-garten-600: #4c5d3c;
+  --color-garten-700: #3b4a2f;
+
+  /* Gedeckte Nebentöne der Illustration */
+  --color-terrakotta-500: #a8695a;
+  --color-apfel-500: #a85b4b;
+  --color-holz-500: #7a5c42;
+  --color-holz-600: #5f4732;
+  --color-holz-700: #4a3726;
+
+  /* Typografie: Serif mit französischem Charakter + moderne Sans */
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
+
+  /* Weiche, warme Schatten */
+  --shadow-karte: 0 1px 2px rgb(23 29 36 / 0.06), 0 8px 24px rgb(23 29 36 / 0.08);
+  --shadow-karte-hover: 0 2px 4px rgb(23 29 36 / 0.08), 0 16px 40px rgb(23 29 36 / 0.14);
+
+  /* Sanfte Übergänge */
+  --ease-haus: cubic-bezier(0.32, 0.72, 0.24, 1);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light only;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-creme-100);
+  color: var(--color-tinte-900);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Elegante Überschriften-Grundeinstellung */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* Sichtbarer, konsistenter Tastatur-Fokus */
+:focus-visible {
+  outline: 2px solid var(--color-messing-500);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background-color: var(--color-messing-300);
+  color: var(--color-tinte-950);
+}
+
+/*
+ * Klickbare Bereiche der Haus-Illustration.
+ * Hover/Fokus heben den Raum dezent hervor; der Fokusrahmen wird als
+ * eigene SVG-Kontur eingeblendet (Outline auf <g> ist nicht verlässlich).
+ */
+.haus-raum {
+  cursor: pointer;
+  outline: none;
+}
+
+.haus-raum .raum-glanz {
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.haus-raum:hover .raum-glanz,
+.haus-raum:focus-visible .raum-glanz {
+  opacity: 1;
+}
+
+.haus-raum .raum-fokus {
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.haus-raum:focus-visible .raum-fokus {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .haus-raum .raum-glanz,
+  .haus-raum .raum-fokus {
+    transition: none;
+  }
 }

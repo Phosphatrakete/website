@@ -1,0 +1,72 @@
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
+import { useReducedMotion } from "framer-motion";
+import { TorSzene } from "@/components/tor/TorSzene";
+import { HausSzene } from "@/components/haus/HausSzene";
+import { RaumKarten } from "@/components/haus/RaumKarten";
+import { siteConfig } from "@/config/site";
+
+/** localStorage-Schlüssel: wurde das Tor bereits geöffnet? */
+const TOR_SCHLUESSEL = "tor:geoeffnet";
+
+type Ansicht = "laden" | "tor" | "haus";
+
+/**
+ * Einstieg der Website: Erstbesucher sehen die Tor-Szene, wiederkehrende
+ * Besucher direkt das Haus (mit der Option, das Tor erneut zu erleben).
+ * Bei `prefers-reduced-motion` wird die Tor-Szene übersprungen.
+ */
+export function Eingang() {
+  const reduzierteBewegung = useReducedMotion();
+  const [ansicht, setAnsicht] = useState<Ansicht>("laden");
+
+  useEffect(() => {
+    if (ansicht !== "laden") return;
+    let bereitsGeoeffnet = false;
+    try {
+      bereitsGeoeffnet = localStorage.getItem(TOR_SCHLUESSEL) === "1";
+    } catch {
+      // ohne localStorage zeigen wir das Tor bei jedem Besuch
+    }
+    setAnsicht(bereitsGeoeffnet || reduzierteBewegung ? "haus" : "tor");
+  }, [ansicht, reduzierteBewegung]);
+
+  const torGeoeffnet = useCallback(() => {
+    try {
+      localStorage.setItem(TOR_SCHLUESSEL, "1");
+    } catch {
+      // nicht kritisch – das Tor erscheint dann erneut
+    }
+    setAnsicht("haus");
+  }, []);
+
+  const torErneut = useCallback(() => setAnsicht("tor"), []);
+
+  if (ansicht === "tor") {
+    return <TorSzene onGeoeffnet={torGeoeffnet} />;
+  }
+
+  if (ansicht === "haus") {
+    return (
+      <>
+        <div className="hidden md:block">
+          <HausSzene onTorErneut={torErneut} />
+        </div>
+        <div className="md:hidden">
+          <RaumKarten onTorErneut={torErneut} />
+        </div>
+      </>
+    );
+  }
+
+  // Ladezustand: ruhige Fläche mit dem Schriftzug, bis localStorage
+  // ausgewertet ist (ein einziger Effekt-Tick).
+  return (
+    <div className="flex h-dvh items-center justify-center bg-creme-100">
+      <p className="font-display text-3xl tracking-[0.22em] text-tinte-500 uppercase opacity-40">
+        {siteConfig.familienname}
+      </p>
+    </div>
+  );
+}
