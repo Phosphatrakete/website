@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { HausStandbild } from "@/components/haus/HausIllustration";
+import { TorKulisse } from "./TorKulisse";
 import { siteConfig } from "@/config/site";
 
 const TOR_DAUER_MS = 2050;
@@ -56,7 +57,8 @@ export function TorSzene({ onGeoeffnet }: { onGeoeffnet: () => void }) {
 
   return (
     <div className="relative h-dvh w-full overflow-hidden bg-creme-100">
-      {/* Kulisse: das Haus hinter dem Tor */}
+      {/* Das Haus – bleibt hinter der Hecke verborgen und erscheint erst
+          beim Eintreten */}
       <motion.div
         className="absolute inset-0"
         initial={{ scale: 0.94 }}
@@ -64,22 +66,30 @@ export function TorSzene({ onGeoeffnet }: { onGeoeffnet: () => void }) {
         transition={{ duration: 1.6, ease: [0.32, 0.72, 0.24, 1] }}
         aria-hidden="true"
       >
-        <HausStandbild p="tor-kulisse" className="h-full w-full" />
+        <HausStandbild p="tor-haus" className="h-full w-full" />
       </motion.div>
+
+      {/* Heckenwand vor dem Haus – löst sich beim Durchschreiten etwas
+          langsamer auf als das Tor (leichte Parallaxe) */}
       <motion.div
-        className="pointer-events-none absolute inset-0 bg-tinte-900"
-        initial={{ opacity: 0.22 }}
-        animate={{ opacity: oeffnetSich ? 0 : 0.22 }}
-        transition={{ duration: 1.4, ease: "easeOut" }}
-      />
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse at 50% 42%, transparent 45%, rgba(23,29,36,0.32) 100%)",
-        }}
+        className="absolute inset-0"
+        initial={{ scale: 1, opacity: 1 }}
+        animate={
+          oeffnetSich ? { scale: 1.5, opacity: 0 } : { scale: 1, opacity: 1 }
+        }
+        transition={{ duration: 0.95, delay: 0.95, ease: [0.5, 0, 0.75, 0.4] }}
+        style={{ transformOrigin: "50% 58%" }}
         aria-hidden="true"
-      />
+      >
+        <TorKulisse p="tor-kulisse" />
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 42%, transparent 45%, rgba(23,29,36,0.26) 100%)",
+          }}
+        />
+      </motion.div>
 
       {/* Überspringen */}
       <button
@@ -128,10 +138,12 @@ export function TorSzene({ onGeoeffnet }: { onGeoeffnet: () => void }) {
               className="flex flex-1 items-end"
               style={{ perspective: "1500px" }}
             >
+              {/* Die Flügel schwingen dem Besucher entgegen auf –
+                  hinter ihnen steht ja die Hecke */}
               <motion.div
                 className="w-1/2"
                 initial={{ rotateY: 0 }}
-                animate={{ rotateY: oeffnetSich ? 74 : 0 }}
+                animate={{ rotateY: oeffnetSich ? -74 : 0 }}
                 transition={{ duration: 1.35, ease: [0.42, 0, 0.24, 1] }}
                 style={{ transformOrigin: "left center" }}
               >
@@ -140,7 +152,7 @@ export function TorSzene({ onGeoeffnet }: { onGeoeffnet: () => void }) {
               <motion.div
                 className="w-1/2"
                 initial={{ rotateY: 0 }}
-                animate={{ rotateY: oeffnetSich ? -74 : 0 }}
+                animate={{ rotateY: oeffnetSich ? 74 : 0 }}
                 transition={{ duration: 1.35, ease: [0.42, 0, 0.24, 1] }}
                 style={{ transformOrigin: "right center" }}
               >
