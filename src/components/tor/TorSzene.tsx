@@ -111,10 +111,15 @@ export function TorSzene({ onGeoeffnet }: { onGeoeffnet: () => void }) {
         style={{ transformOrigin: "50% 58%" }}
       >
         <div className="flex w-[min(92vw,760px)] flex-col items-center">
-          {/* Schriftzug */}
-          <p className="font-display text-4xl font-medium tracking-[0.22em] text-tinte-900 uppercase sm:text-6xl">
-            {siteConfig.familienname}
-          </p>
+          {/* Überschrift */}
+          <h1 className="text-center">
+            <span className="block font-sans text-xs font-medium tracking-[0.35em] text-tinte-700 uppercase sm:text-sm">
+              Website der Familie
+            </span>
+            <span className="mt-2 block font-display text-4xl font-medium tracking-[0.22em] text-tinte-900 uppercase sm:text-6xl">
+              {siteConfig.familienname}
+            </span>
+          </h1>
           <div
             className="mt-3 mb-6 flex w-56 items-center gap-2 text-messing-500 sm:w-72"
             aria-hidden="true"
