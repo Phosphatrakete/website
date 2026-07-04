@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/config/site";
@@ -38,7 +39,7 @@ export function SiteHeader() {
                   href={raum.slug}
                   aktiv={pathname.startsWith(raum.slug)}
                 >
-                  {raum.id === "stammbaum" ? "Stammbaum" : raum.name}
+                  {raum.navName ?? raum.name}
                 </NavLink>
               </li>
             ))}
@@ -74,11 +75,30 @@ function NavLink({
 }
 
 function MobileMenu({ pathname }: { pathname: string }) {
+  const detailsRef = useRef<HTMLDetailsElement>(null);
+
+  // Nach einer Client-Navigation schließt sich das Menü, statt die neue
+  // Seite weiter zu überdecken.
+  useEffect(() => {
+    if (detailsRef.current) detailsRef.current.open = false;
+  }, [pathname]);
+
   return (
-    <details className="relative md:hidden">
+    <details
+      ref={detailsRef}
+      className="relative md:hidden"
+      onKeyDown={(ereignis) => {
+        // ESC schließt das offene Menü und gibt den Fokus zurück.
+        if (ereignis.key === "Escape" && detailsRef.current?.open) {
+          ereignis.stopPropagation();
+          detailsRef.current.open = false;
+          detailsRef.current.querySelector("summary")?.focus();
+        }
+      }}
+    >
       <summary
         className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full border border-creme-300/70 bg-creme-50/80 shadow-karte backdrop-blur-sm [&::-webkit-details-marker]:hidden"
-        aria-label="Menü öffnen"
+        aria-label="Menü"
       >
         <svg
           aria-hidden="true"
@@ -102,7 +122,7 @@ function MobileMenu({ pathname }: { pathname: string }) {
                 href={raum.slug}
                 aktiv={pathname.startsWith(raum.slug)}
               >
-                {raum.id === "stammbaum" ? "Stammbaum" : raum.name}
+                {raum.navName ?? raum.name}
               </MobileNavLink>
             </li>
           ))}

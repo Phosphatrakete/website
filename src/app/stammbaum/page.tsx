@@ -42,7 +42,7 @@ export default async function StammbaumSeite() {
       <div className="mx-auto max-w-6xl px-4 pt-10 pb-20 sm:px-6">
         {/* Seitenkopf */}
         <header className="mx-auto max-w-2xl text-center">
-          <p className="text-sm tracking-[0.18em] text-messing-600 uppercase">
+          <p className="text-sm tracking-[0.18em] text-messing-700 uppercase">
             Der Apfelbaum
           </p>
           <h1 className="mt-2 text-5xl text-tinte-900">Der Stammbaum</h1>

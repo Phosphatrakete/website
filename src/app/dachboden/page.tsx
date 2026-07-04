@@ -15,7 +15,7 @@ export default function DachbodenSeite() {
   return (
     <RaumSeite raumId="dachboden">
       <div className="mx-auto max-w-2xl px-4 py-14 text-center sm:px-6">
-        <p className="text-sm tracking-[0.18em] text-messing-600 uppercase">
+        <p className="text-sm tracking-[0.18em] text-messing-700 uppercase">
           Dachboden
         </p>
         <h1 className="mt-2 text-5xl text-tinte-900">

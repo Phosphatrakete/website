@@ -77,7 +77,7 @@ export function BibliothekScrolly() {
     <div className="mx-auto max-w-6xl px-4 pb-24 sm:px-6">
       {/* Seitenkopf */}
       <header className="max-w-2xl pt-10 sm:pt-14">
-        <p className="font-sans text-sm font-medium tracking-[0.18em] text-messing-600 uppercase">
+        <p className="font-sans text-sm font-medium tracking-[0.18em] text-messing-700 uppercase">
           Bibliothek
         </p>
         <h1 className="mt-2 text-4xl leading-tight text-tinte-900 sm:text-5xl">

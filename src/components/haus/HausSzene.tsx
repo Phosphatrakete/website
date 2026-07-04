@@ -135,6 +135,8 @@ export function HausSzene({ onTorErneut }: { onTorErneut?: () => void }) {
                 stroke="#c2a565"
                 strokeWidth="2.5"
               />
+              {/* Doppelter Fokusring (hell + dunkel), damit er auf allen
+                  Flächen der Illustration ausreichend Kontrast hat */}
               <rect
                 className="raum-fokus"
                 x={raum.ausschnitt.x - 6}
@@ -143,8 +145,19 @@ export function HausSzene({ onTorErneut }: { onTorErneut?: () => void }) {
                 height={raum.ausschnitt.h + 12}
                 rx="24"
                 fill="none"
-                stroke="#a98a4e"
-                strokeWidth="3.5"
+                stroke="#fdfbf5"
+                strokeWidth="7"
+              />
+              <rect
+                className="raum-fokus"
+                x={raum.ausschnitt.x - 6}
+                y={raum.ausschnitt.y - 6}
+                width={raum.ausschnitt.b + 12}
+                height={raum.ausschnitt.h + 12}
+                rx="24"
+                fill="none"
+                stroke="#1e2630"
+                strokeWidth="3"
               />
             </g>
           ))}
@@ -180,7 +193,7 @@ export function HausSzene({ onTorErneut }: { onTorErneut?: () => void }) {
           onClick={onTorErneut}
           className="absolute right-4 bottom-6 rounded-full border border-creme-300/70 bg-creme-50/80 px-3 py-1.5 text-xs text-tinte-600 shadow-karte backdrop-blur-sm transition-colors hover:bg-creme-200 hover:text-tinte-900"
         >
-          Tor erneut ansehen
+          Tor-Szene erneut ansehen
         </button>
       ) : null}
     </div>
@@ -188,6 +201,7 @@ export function HausSzene({ onTorErneut }: { onTorErneut?: () => void }) {
 }
 
 function RaumLabel({ raumId }: { raumId: string }) {
+  const reduzierteBewegung = useReducedMotion();
   const raum = raumZuId(raumId);
   if (!raum) return null;
   const mitteX = raum.ausschnitt.x + raum.ausschnitt.b / 2;
@@ -198,10 +212,10 @@ function RaumLabel({ raumId }: { raumId: string }) {
       : raum.untertitel;
   return (
     <motion.g
-      initial={{ opacity: 0, y: 6 }}
+      initial={reduzierteBewegung ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 6 }}
-      transition={{ duration: 0.25, ease: "easeOut" }}
+      exit={reduzierteBewegung ? { opacity: 0, y: 0 } : { opacity: 0, y: 6 }}
+      transition={{ duration: reduzierteBewegung ? 0 : 0.25, ease: "easeOut" }}
       style={{ pointerEvents: "none" }}
       aria-hidden="true"
     >

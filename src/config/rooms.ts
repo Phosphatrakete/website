@@ -22,8 +22,10 @@ export interface Raum {
   id: string;
   /** URL-Pfad des Raums, z. B. "/bibliothek". */
   slug: string;
-  /** Anzeigename im Label, in der Navigation und auf Karten. */
+  /** Anzeigename im Label und auf Karten. */
   name: string;
+  /** Abweichender, kürzerer Name für die Navigationsleiste (optional). */
+  navName?: string;
   /** Kurze Unterzeile für Hover-Label und mobile Karten. */
   untertitel: string;
   /** Beschreibung für Metadaten und Kartentexte. */
@@ -68,6 +70,7 @@ export const raeume: readonly Raum[] = [
     id: "stammbaum",
     slug: "/stammbaum",
     name: "Der Apfelbaum",
+    navName: "Stammbaum",
     untertitel: "Der Stammbaum",
     beschreibung:
       "Der Stammbaum der Familie – geschützt, nur mit dem Familienpasswort zugänglich.",

@@ -55,7 +55,7 @@ export function KapitelAbschnitt({
           {roemisch}.
         </span>
         <div className="min-w-0">
-          <p className="font-sans text-xs font-semibold tracking-[0.18em] text-messing-600 uppercase">
+          <p className="font-sans text-xs font-semibold tracking-[0.18em] text-messing-700 uppercase">
             {kapitel.jahrSpanne.label}
           </p>
           <h2

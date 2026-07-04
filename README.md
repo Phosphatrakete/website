@@ -32,6 +32,9 @@ Produktion lokal testen: `npm run build && npm run start`.
 
 Der Name wird zentral in `src/config/site.ts` gepflegt (`familienname`,
 `domain`, `url`) – alle Komponenten, Texte und Metadaten leiten ihn ab.
+Zwei statische Ausnahmen bei einer Namensänderung mitziehen:
+`src/app/opengraph-image.alt.txt` (Alt-Text des Vorschaubilds) und die
+Kapiteltexte in `src/content/bibliothek.ts` (ohnehin TODO-Platzhalter).
 
 ## Räume & Erweiterbarkeit
 
@@ -92,6 +95,11 @@ Konfiguration über Umgebungsvariablen (`.env.local`, niemals ins Repo!):
 | `SESSION_SECRET` | Zufallsgeheimnis (≥ 32 Zeichen) zum Signieren der Session |
 
 Zufallsgeheimnis erzeugen: `openssl rand -base64 48`
+
+**Wichtig:** Ein langes, nicht erratbares Familienpasswort wählen (am besten
+eine Passphrase aus mehreren Wörtern). Der Login drosselt wiederholte
+Fehlversuche zwar serverseitig, doch bei Serverless-Hosting gilt dieser
+Zähler nur je Instanz – die Passwortstärke ist der eigentliche Schutz.
 
 **Passwort ändern:** Wert von `FAMILY_PASSWORD` in `.env.local` bzw. in den
 Vercel-Umgebungsvariablen ändern und neu deployen. Bestehende Sessions bleiben

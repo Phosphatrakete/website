@@ -52,7 +52,7 @@ export function Zeitleiste({
                 >
                   <span
                     className={`text-[10px] font-semibold tracking-[0.16em] uppercase ${
-                      aktiv ? "text-messing-600" : "text-tinte-500"
+                      aktiv ? "text-messing-700" : "text-tinte-500"
                     }`}
                   >
                     {roemischeZiffer(eintrag.nummer)} ·{" "}
@@ -106,7 +106,7 @@ export function Zeitleiste({
               >
                 <span
                   className={`block text-[10px] font-semibold tracking-[0.16em] uppercase transition-colors ${
-                    aktiv ? "text-messing-600" : "text-tinte-500"
+                    aktiv ? "text-messing-700" : "text-tinte-500"
                   }`}
                 >
                   {eintrag.jahrSpanne.label}

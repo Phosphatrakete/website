@@ -23,6 +23,25 @@ export function TorSzene({ onGeoeffnet }: { onGeoeffnet: () => void }) {
     };
   }, []);
 
+  // Enter/Leertaste öffnen das Tor auch dann, wenn kein Bedienelement
+  // fokussiert ist (etwa nach einem Klick auf den Hintergrund).
+  useEffect(() => {
+    function beiTaste(ereignis: KeyboardEvent) {
+      if (ereignis.key !== "Enter" && ereignis.key !== " ") return;
+      const ziel = ereignis.target;
+      // Fokussierte Buttons/Links behalten ihr natives Tastaturverhalten.
+      if (ziel instanceof Element && ziel.closest("button, a, summary")) {
+        return;
+      }
+      ereignis.preventDefault();
+      oeffnen();
+    }
+    window.addEventListener("keydown", beiTaste);
+    return () => window.removeEventListener("keydown", beiTaste);
+    // oeffnen ist über phase/reduzierteBewegung hinreichend stabil.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase, reduzierteBewegung]);
+
   function oeffnen() {
     if (phase !== "zu") return;
     if (reduzierteBewegung) {

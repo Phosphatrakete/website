@@ -111,7 +111,7 @@ async function hauptprogramm() {
         "",
         "So funktioniert der Import:",
         "  1. Zu veröffentlichende Bilder nach _eingang/ kopieren",
-        "     (jpg, jpeg, png, webp, heic/heif, avif, tif).",
+        "     (jpg, jpeg, png, webp, heic/heif, avif, tif/tiff).",
         "  2. Erneut ausführen: npm run bilder:import",
         "",
         "Hinweis: _eingang/ enthält Originale mit Metadaten und gehört",

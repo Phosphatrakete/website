@@ -16,7 +16,7 @@ export default function GarageSeite() {
       <div className="mx-auto max-w-6xl px-4 pt-10 pb-20 sm:px-6">
         {/* Seitenkopf */}
         <header className="mx-auto max-w-2xl text-center">
-          <p className="text-sm tracking-[0.18em] text-messing-600 uppercase">
+          <p className="text-sm tracking-[0.18em] text-messing-700 uppercase">
             Garage
           </p>
           <h1 className="mt-2 text-5xl text-tinte-900">Die Leidenschaft</h1>
@@ -56,10 +56,10 @@ export default function GarageSeite() {
             <path d="m5.6 7.8 1.7 1.7 3.1-3.3" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           <p>
-            Neue Bilder werden über die EXIF-bereinigende Import-Pipeline
-            hinzugefügt – sie entfernt sämtliche Metadaten (etwa GPS-Daten),
-            bevor ein Bild die Website erreicht. Details dazu stehen in der
-            README.
+            Alle Bilder dieser Galerie durchlaufen vor der Veröffentlichung
+            eine Prüfung: Sämtliche Metadaten – etwa GPS-Daten der Kamera –
+            werden entfernt, und es ist darauf geachtet, dass weder
+            Kennzeichen noch Personen oder Orte zu erkennen sind.
           </p>
         </aside>
       </div>

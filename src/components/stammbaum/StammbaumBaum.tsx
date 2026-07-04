@@ -472,7 +472,7 @@ export function StammbaumBaum({ daten }: { daten: FamilienBaum }) {
         >
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-xs tracking-[0.16em] text-messing-600 uppercase">
+              <p className="text-xs tracking-[0.16em] text-messing-700 uppercase">
                 {aktivePerson.generation === 0
                   ? "Wurzelgeneration"
                   : `Generation ${aktivePerson.generation + 1}`}
@@ -508,7 +508,7 @@ export function StammbaumBaum({ daten }: { daten: FamilienBaum }) {
             <div>
               <dt className="font-medium text-tinte-800">Gestorben</dt>
               <dd className="text-tinte-600">
-                {aktivePerson.sterbejahr ?? "– (lebt bzw. unbekannt)"}
+                {aktivePerson.sterbejahr ?? "– (lebt oder unbekannt)"}
               </dd>
             </div>
             {beziehungen.eltern.length > 0 ? (

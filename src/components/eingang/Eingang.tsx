@@ -52,12 +52,16 @@ export function Eingang() {
   }
 
   if (ansicht === "haus") {
+    // Der interaktive Querschnitt braucht ein breites Fenster UND ein
+    // querformatiges Seitenverhältnis (sonst schneidet die randlose
+    // SVG-Darstellung Garage und Apfelbaum ab) – alle anderen Geräte,
+    // etwa Tablets im Hochformat, erhalten die Kartenansicht.
     return (
       <>
-        <div className="hidden md:block">
+        <div className="hidden [@media(min-width:768px)_and_(min-aspect-ratio:5/4)]:block">
           <HausSzene onTorErneut={torErneut} />
         </div>
-        <div className="md:hidden">
+        <div className="[@media(min-width:768px)_and_(min-aspect-ratio:5/4)]:hidden">
           <RaumKarten onTorErneut={torErneut} />
         </div>
       </>

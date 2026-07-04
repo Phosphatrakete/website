@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  motion,
-  useReducedMotion,
-  useTransform,
-  type MotionValue,
-} from "framer-motion";
+import { motion, useTransform, type MotionValue } from "framer-motion";
 import { TodoHinweis } from "@/components/ui/TodoHinweis";
 
 /**
@@ -128,7 +123,6 @@ export function FluchtKarte({
   idPraefix: string;
   className?: string;
 }) {
-  const reduzierteBewegung = useReducedMotion();
   // Kleine Pufferzonen, damit die Route früh beginnt und sicher vollendet.
   const pfadLaenge = useTransform(fortschritt, [0.02, 0.92], [0, 1]);
   const maskenId = `${idPraefix}-routen-maske`;
@@ -231,20 +225,20 @@ export function FluchtKarte({
           {/*
             Fluchtroute: Die gestrichelte Linie liegt vollständig im SVG;
             eine Maske mit animierter pathLength legt sie beim Scrollen frei.
-            Bei reduzierter Bewegung entfällt die Maske komplett.
+            Bei reduzierter Bewegung zeigt CSS (motion-reduce) stattdessen
+            die statische Route – bewusst ohne JS-Verzweigung, damit Server-
+            und Client-Markup identisch bleiben (kein Hydration-Mismatch).
           */}
-          {!reduzierteBewegung ? (
-            <mask id={maskenId} maskUnits="userSpaceOnUse">
-              <motion.path
-                d={ROUTEN_PFAD}
-                fill="none"
-                stroke="#ffffff"
-                strokeWidth="8"
-                strokeLinecap="round"
-                style={{ pathLength: pfadLaenge }}
-              />
-            </mask>
-          ) : null}
+          <mask id={maskenId} maskUnits="userSpaceOnUse">
+            <motion.path
+              d={ROUTEN_PFAD}
+              fill="none"
+              stroke="#ffffff"
+              strokeWidth="8"
+              strokeLinecap="round"
+              style={{ pathLength: pfadLaenge }}
+            />
+          </mask>
           <path
             d={ROUTEN_PFAD}
             fill="none"
@@ -252,7 +246,17 @@ export function FluchtKarte({
             strokeWidth="2.2"
             strokeLinecap="round"
             strokeDasharray="1.5 7"
-            mask={reduzierteBewegung ? undefined : `url(#${maskenId})`}
+            mask={`url(#${maskenId})`}
+            className="motion-reduce:hidden"
+          />
+          <path
+            d={ROUTEN_PFAD}
+            fill="none"
+            stroke={FARBEN.route}
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeDasharray="1.5 7"
+            className="hidden motion-reduce:block"
           />
 
           {/* Stationen mit Labels */}

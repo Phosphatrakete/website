@@ -66,6 +66,15 @@ export function Lightbox({
   // Pfeiltasten blättern durch die Einträge.
   useEffect(() => {
     function beiTaste(ereignis: KeyboardEvent) {
+      // Pfeiltasten gehören dem fokussierten Video-Player (Spulen,
+      // Lautstärke) bzw. Eingabefeldern – dort nicht blättern.
+      if (
+        ereignis.target instanceof HTMLMediaElement ||
+        ereignis.target instanceof HTMLInputElement ||
+        ereignis.target instanceof HTMLTextAreaElement
+      ) {
+        return;
+      }
       if (ereignis.key === "ArrowLeft") {
         ereignis.preventDefault();
         zurueck();
@@ -106,17 +115,21 @@ export function Lightbox({
           }
         }}
       >
-        <motion.figure
-          key={eintrag.id}
-          initial={
-            reduzierteBewegung ? { opacity: 1 } : { opacity: 0, scale: 0.985 }
-          }
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3, ease: [0.32, 0.72, 0.24, 1] }}
-          className="relative flex max-h-full w-full max-w-6xl flex-col items-center"
-        >
+        {/* Nur die Medienfläche wird beim Wechsel neu aufgebaut – Buttons,
+            Bildunterschrift und Live-Region bleiben stabil im DOM, damit
+            der Tastaturfokus erhalten bleibt und Screenreader den Wechsel
+            über die dauerhafte Live-Region ansagen. */}
+        <figure className="relative flex max-h-full w-full max-w-6xl flex-col items-center">
           {/* Medienfläche */}
-          <div className="relative h-[min(70svh,52rem)] w-full">
+          <motion.div
+            key={eintrag.id}
+            initial={
+              reduzierteBewegung ? { opacity: 1 } : { opacity: 0, scale: 0.985 }
+            }
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3, ease: [0.32, 0.72, 0.24, 1] }}
+            className="relative h-[min(70svh,52rem)] w-full"
+          >
             {eintrag.typ === "bild" ? (
               <Image
                 src={eintrag.quelle}
@@ -139,7 +152,7 @@ export function Lightbox({
                 Ihr Browser kann dieses Videoformat leider nicht abspielen.
               </video>
             )}
-          </div>
+          </motion.div>
 
           {/* Titel, Geschichte und Zähler */}
           <figcaption className="mt-5 max-w-2xl text-center">
@@ -155,6 +168,7 @@ export function Lightbox({
               aria-live="polite"
               className="mt-3 block text-xs tracking-[0.18em] text-creme-400/70 uppercase"
             >
+              <span className="sr-only">{eintrag.titel}, </span>
               {index + 1} von {anzahl}
             </span>
           </figcaption>
@@ -192,7 +206,7 @@ export function Lightbox({
             </button>
           </div>
           ) : null}
-        </motion.figure>
+        </figure>
 
         {/* Schließen – oben rechts, erhält beim Öffnen den Fokus */}
         <button

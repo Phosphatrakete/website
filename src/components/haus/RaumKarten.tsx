@@ -55,7 +55,7 @@ function RaumKarte({ raum }: { raum: Raum }) {
         <HausStandbild
           p={`karte-${raum.id}`}
           ausschnitt={raum.ausschnitt}
-          className="h-40 w-full transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+          className="h-40 w-full motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out motion-safe:group-hover:scale-[1.04]"
         />
       </div>
       <div className="flex items-start justify-between gap-2 p-4">

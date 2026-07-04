@@ -34,7 +34,7 @@ export default function ImpressumSeite() {
           <p>Vorname Nachname, Anschrift wie oben</p>
         </section>
         <p className="text-xs text-tinte-600">
-          Hinweis: Diese Website ist ein privates, nicht-kommerzielles
+          Hinweis: Diese Website ist ein privates, nichtkommerzielles
           Familienprojekt. <TodoHinweis>TODO – Pflichtangaben prüfen</TodoHinweis>
         </p>
       </div>

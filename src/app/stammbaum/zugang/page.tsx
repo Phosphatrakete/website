@@ -49,10 +49,10 @@ export default async function ZugangSeite({
       </div>
 
       <header className="mt-8 text-center">
-        <p className="text-sm tracking-[0.18em] text-messing-600 uppercase">
-          {raum.untertitel}
+        <p className="text-sm tracking-[0.18em] text-messing-700 uppercase">
+          {raum.name}
         </p>
-        <h1 className="mt-2 text-5xl text-tinte-900">Der Apfelbaum</h1>
+        <h1 className="mt-2 text-5xl text-tinte-900">{raum.untertitel}</h1>
         <p className="mt-3 font-display text-xl text-tinte-600 italic">
           Ein Schloss, ein Familienpasswort.
         </p>
@@ -65,6 +65,7 @@ export default async function ZugangSeite({
       >
         {fehler ? (
           <p
+            id="passwort-fehler"
             role="alert"
             className="mb-5 rounded-lg border border-apfel-500/30 bg-apfel-500/10 px-4 py-3 text-sm leading-relaxed text-tinte-800"
           >
@@ -84,6 +85,7 @@ export default async function ZugangSeite({
           name="passwort"
           required
           autoComplete="current-password"
+          aria-describedby={fehler ? "passwort-fehler" : undefined}
           className="mt-2 block w-full rounded-lg border border-creme-400/80 bg-creme-50 px-3.5 py-2.5 text-tinte-900 shadow-inner placeholder:text-tinte-500/60"
           placeholder="••••••••"
         />
