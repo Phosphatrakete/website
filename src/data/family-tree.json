@@ -1,0 +1,113 @@
+{
+  "$schema-hinweis": "Stammbaum-Daten der Familie. Schema: generationen = Anzahl der Ebenen (0 = älteste Generation, an den Wurzeln). personen[]: id, vorname, nachname, geburtsjahr, sterbejahr (null = lebt bzw. unbekannt), geburtsort, anmerkung, generation. partnerschaften[]: id, partner = [personId, personId], kinder = [personId, …]. ACHTUNG: Diese Datei enthält ausschließlich FIKTIVE Beispieldaten – vor dem Livegang durch echte Familiendaten ersetzen.",
+  "generationen": 3,
+  "personen": [
+    {
+      "id": "p1",
+      "vorname": "Anton",
+      "nachname": "Musterfamilie",
+      "geburtsjahr": 1898,
+      "sterbejahr": 1972,
+      "geburtsort": "Musterhausen am Beispielbach (fiktiv)",
+      "anmerkung": "Fiktive Beispielperson – Stammvater der Beispieldaten. Bitte durch echte Angaben ersetzen.",
+      "generation": 0
+    },
+    {
+      "id": "p2",
+      "vorname": "Amalie",
+      "nachname": "Musterfamilie",
+      "geburtsjahr": 1902,
+      "sterbejahr": 1981,
+      "geburtsort": "Beispielstadt (fiktiv)",
+      "anmerkung": "Fiktive Beispielperson – Stammmutter der Beispieldaten.",
+      "generation": 0
+    },
+    {
+      "id": "p3",
+      "vorname": "Bruno",
+      "nachname": "Musterfamilie",
+      "geburtsjahr": 1926,
+      "sterbejahr": 1999,
+      "geburtsort": "Musterhausen am Beispielbach (fiktiv)",
+      "anmerkung": "Fiktive Beispielperson – ältestes Kind von Anton und Amalie.",
+      "generation": 1
+    },
+    {
+      "id": "p4",
+      "vorname": "Klara",
+      "nachname": "Musterfrau",
+      "geburtsjahr": 1931,
+      "sterbejahr": null,
+      "geburtsort": "Beispielheim (fiktiv)",
+      "anmerkung": "Fiktive Beispielperson – heiratete in die Musterfamilie ein.",
+      "generation": 1
+    },
+    {
+      "id": "p5",
+      "vorname": "Berta",
+      "nachname": "Musterfamilie",
+      "geburtsjahr": 1930,
+      "sterbejahr": 2012,
+      "geburtsort": "Musterhausen am Beispielbach (fiktiv)",
+      "anmerkung": "Fiktive Beispielperson – jüngstes Kind von Anton und Amalie.",
+      "generation": 1
+    },
+    {
+      "id": "p6",
+      "vorname": "Bernhard",
+      "nachname": "Mustermann",
+      "geburtsjahr": 1928,
+      "sterbejahr": 2005,
+      "geburtsort": "Platzhalterdorf (fiktiv)",
+      "anmerkung": "Fiktive Beispielperson – heiratete Berta Musterfamilie.",
+      "generation": 1
+    },
+    {
+      "id": "p7",
+      "vorname": "Clara",
+      "nachname": "Musterfamilie",
+      "geburtsjahr": 1958,
+      "sterbejahr": null,
+      "geburtsort": "Beispielstadt (fiktiv)",
+      "anmerkung": "Fiktive Beispielperson – Tochter von Bruno und Klara.",
+      "generation": 2
+    },
+    {
+      "id": "p8",
+      "vorname": "Christoph",
+      "nachname": "Musterfamilie",
+      "geburtsjahr": 1961,
+      "sterbejahr": null,
+      "geburtsort": "Beispielstadt (fiktiv)",
+      "anmerkung": "Fiktive Beispielperson – Sohn von Bruno und Klara.",
+      "generation": 2
+    },
+    {
+      "id": "p9",
+      "vorname": "Charlotte",
+      "nachname": "Mustermann",
+      "geburtsjahr": 1963,
+      "sterbejahr": null,
+      "geburtsort": "Platzhalterdorf (fiktiv)",
+      "anmerkung": "Fiktive Beispielperson – Tochter von Berta und Bernhard.",
+      "generation": 2
+    }
+  ],
+  "partnerschaften": [
+    {
+      "id": "pa1",
+      "partner": ["p1", "p2"],
+      "kinder": ["p3", "p5"]
+    },
+    {
+      "id": "pa2",
+      "partner": ["p3", "p4"],
+      "kinder": ["p7", "p8"]
+    },
+    {
+      "id": "pa3",
+      "partner": ["p5", "p6"],
+      "kinder": ["p9"]
+    }
+  ]
+}
