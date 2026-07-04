@@ -50,7 +50,7 @@ export function KapitelAbschnitt({
       <header className="flex items-start gap-4 sm:gap-5">
         <span
           aria-hidden="true"
-          className="mt-0.5 font-display text-4xl leading-none text-messing-400 select-none sm:text-5xl"
+          className="mt-0.5 font-display text-4xl leading-none text-messing-600 select-none sm:text-5xl"
         >
           {roemisch}.
         </span>

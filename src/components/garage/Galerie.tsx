@@ -40,6 +40,9 @@ export function Galerie({
                       width={eintrag.breite}
                       height={eintrag.hoehe}
                       sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 92vw"
+                      // Die ersten Motive sind beim Laden im Sichtfeld –
+                      // sie eager zu laden verbessert den LCP deutlich.
+                      priority={index < 3}
                       className="h-auto w-full motion-safe:transition-transform motion-safe:duration-500 motion-safe:group-hover:scale-[1.02]"
                     />
                   ) : (
